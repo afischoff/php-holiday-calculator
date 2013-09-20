@@ -1,6 +1,6 @@
 <?php
 
-include 'holidaycalc.class.php';
+include 'holidaycalc.class.php'; // include if you're not using Composer
 
 // namespace config
 use \afischoff\HolidayCalc as HolidayCalc;
