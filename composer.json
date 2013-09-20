@@ -1,0 +1,6 @@
+{
+    "name": "afischoff/php-holiday-calculator",
+    "require": {
+        "php": ">=4.1.0"
+    }
+}
