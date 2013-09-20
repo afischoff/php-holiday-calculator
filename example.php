@@ -1,12 +1,9 @@
 <?php
 
-include 'holidaycalc.class.php'; // include if you're not using Composer
-
-// namespace config
-use \afischoff\HolidayCalc as HolidayCalc;
+include 'Holidaycalc.php'; // include if you're not using Composer
 
 // load class and loop out future US Holidays in English
-$usHolidays = new HolidayCalc('us_holidays', 'en_us');
+$usHolidays = new \Afischoff\Holidaycalc('us_holidays', 'en_us');
 
 // get an array of upcoming holidays in chronological order
 $showUpcoming = true;
@@ -31,7 +28,7 @@ print_r($alphabeticHolidays);
 /*************************************/
 
 // get an array of upcoming US and Jewish holidays together (in English), in chronological order
-$usJewishHolidays = new HolidayCalc(array('us_holidays', 'jewish_holidays'), 'en_us');
+$usJewishHolidays = new \Afischoff\Holidaycalc(array('us_holidays', 'jewish_holidays'), 'en_us');
 
 $showUpcoming = true;
 $unixTimeStampKeys = false; // when true, the next 2 params are ignored
