@@ -37,3 +37,17 @@ $outputDateFormat = 'm/d/y';
 $upcomingHolidays = $usJewishHolidays->getAllHolidaysByCalendar($showUpcoming, $unixTimeStampKeys, $includeDateOutput, $outputDateFormat);
 
 print_r($upcomingHolidays);
+
+/*************************************/
+
+// get an array of upcoming UK holidays in chronological order
+$ukHolidays = new \Afischoff\Holidaycalc(array('uk_holidays'));
+
+$showUpcoming = true;
+$unixTimeStampKeys = false; // when true, the next 2 params are ignored
+$includeDateOutput = true;
+$outputDateFormat = 'Y-m-d';
+$upcomingHolidays = $ukHolidays->getAllHolidaysByCalendar($showUpcoming, $unixTimeStampKeys, $includeDateOutput, $outputDateFormat);
+
+print_r($upcomingHolidays);
+
