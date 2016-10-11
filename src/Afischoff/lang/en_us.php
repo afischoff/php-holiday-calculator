@@ -37,4 +37,14 @@ $holiday_names = array(
 	'JEWISH_PESACH' => "Passover",
 	'JEWISH_LAG_BA_OMER' => "Lag Ba'Omer",
 	'JEWISH_SHAVUOT' => "Shavuos",
+
+    //UK Holidays
+    'UK_NEW_YEARS' => "New Year's Day",
+    'UK_GOOD_FRIDAY' => "Good Friday",
+    'UK_EASTER_MONDAY' => "Easter Monday",
+    'UK_EARLY_MAY' => "Early May Bank Holiday",
+    'UK_SPRING' => "Spring Bank Holiday",
+    'UK_SUMMER' => "Summer Bank Holiday",
+    'UK_CHRISTMAS' => "Christmas Day",
+    'UK_BOXING_DAY' => "Boxing Day",
 );

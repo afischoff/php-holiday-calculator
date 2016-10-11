@@ -35,11 +35,19 @@ class Holidaycalc
 	public function getAllHolidaysByAlphabetic($upcoming = false, $timeStampKeys = false, $showDate = false, $dateFormat = 'm/d/y') {
 		$holidays = array();
 		foreach ($this->selected_holidays as $hol => $timestr) {
-			$hol_date = strpos($timestr, '@') === false ? strtotime($timestr) : substr($timestr,1);
+            if (is_callable($timestr)) {
+                $hol_date = $timestr(date('Y'));
+            } else {
+                $hol_date = $this->isTimestamp($timestr) ? substr($timestr,1) : strtotime($timestr);
+            }
 
-			if ($upcoming && strpos($timestr, '@') === false && $hol_date < time()) {
+			if ($upcoming && !$this->isTimestamp($timestr) && $hol_date < time()) {
 				$nextYear = date('Y') + 1;
-				$hol_date = strtotime($timestr.' '.$nextYear);
+                if (is_callable($timestr)) {
+                    $hol_date = $timestr($nextYear);
+                } else {
+                    $hol_date = strtotime($timestr.' '.$nextYear);
+                }
 			}
 			$key = (!$timeStampKeys ? $hol : $hol_date);
 			$holidays[$key] = $this->holiday_names[$hol];
@@ -52,6 +60,11 @@ class Holidaycalc
 		return $holidays;
 	}
 
+    private function isFuture($holiday)
+    {
+        
+    }
+
 	/**
 	 * @param bool $upcoming
 	 * @param bool $timeStampKeys
@@ -62,11 +75,19 @@ class Holidaycalc
 	public function getAllHolidaysByCalendar($upcoming = false, $timeStampKeys = false, $showDate = false, $dateFormat = 'm/d/y') {
 		$holidays = array();
 		foreach ($this->selected_holidays as $hol => $timestr) {
-			$hol_date = strpos($timestr, '@') === false ? strtotime($timestr) : substr($timestr,1);
+            if (is_callable($timestr)) {
+                $hol_date = $timestr(date('Y'));
+            } else {
+                $hol_date = $this->isTimestamp($timestr) ? substr($timestr,1) : strtotime($timestr);
+            }
 
-			if ($upcoming && strpos($timestr, '@') === false && $hol_date < time()) {
+			if ($upcoming && !$this->isTimestamp($timestr) && $hol_date < time()) {
 				$nextYear = date('Y') + 1;
-				$hol_date = strtotime($timestr.' '.$nextYear);
+                if (is_callable($timestr)) {
+                    $hol_date = $timestr($nextYear);
+                } else {
+                    $hol_date = strtotime($timestr.' '.$nextYear);
+                }
 			}
 
 			$holidays[ $hol_date ] = $hol;
@@ -94,4 +115,14 @@ class Holidaycalc
 
 		return $holidays;
 	}
+
+    /**
+     * Checks whether the calendar string is a timestamp (in which case it will begin with an @ sign).
+     * @param string $timestr The calendar string.
+     * @return bool
+     */
+    private function isTimestamp($timestr)
+    {
+        return is_string($timestr) && preg_match('/^@/', $timestr);
+    }
 }
